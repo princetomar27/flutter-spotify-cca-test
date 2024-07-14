@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotifyclone/core/config/themes/app_color.dart';
+import 'package:spotifyclone/presentation/authentication/pages/authentication_page.dart';
 import 'package:spotifyclone/presentation/choose_mode/cubit/theme_cubit.dart';
 
 import '../../../common/widgets/button/main_app_button.dart';
@@ -19,7 +20,7 @@ class ChooseModePage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.all(40),
+            padding: const EdgeInsets.all(60),
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
@@ -33,7 +34,7 @@ class ChooseModePage extends StatelessWidget {
             color: Colors.black.withOpacity(0.15),
           ),
           Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: const EdgeInsets.all(60.0),
             child: Column(
               children: [
                 Align(
@@ -146,7 +147,7 @@ class ChooseModePage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ChooseModePage()));
+                            builder: (context) => const AuthenticationPage()));
                   },
                   title: 'Continue',
                 ),

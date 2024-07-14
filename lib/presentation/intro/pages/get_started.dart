@@ -14,7 +14,7 @@ class GetStarted extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.all(40),
+            padding: const EdgeInsets.all(60),
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
@@ -28,7 +28,7 @@ class GetStarted extends StatelessWidget {
             color: Colors.black.withOpacity(0.15),
           ),
           Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: const EdgeInsets.all(60.0),
             child: Column(
               children: [
                 Align(
