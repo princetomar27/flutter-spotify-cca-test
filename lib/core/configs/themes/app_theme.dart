@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'app_color.dart';
+
+import 'app_colors.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
@@ -28,7 +29,7 @@ class AppTheme {
               backgroundColor: AppColors.primary,
               elevation: 0,
               textStyle:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)))));
 

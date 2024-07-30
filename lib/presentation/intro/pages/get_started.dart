@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:spotifyclone/common/widgets/button/main_app_button.dart';
+import 'package:spotifyclone/common/widgets/main_app_button_widget.dart';
 import 'package:spotifyclone/core/assets/app_images.dart';
 import 'package:spotifyclone/core/assets/app_vectors.dart';
 import 'package:spotifyclone/presentation/choose_mode/pages/choose_mode_page.dart';
+import 'package:svg_flutter/svg_flutter.dart';
 
 class GetStarted extends StatelessWidget {
   const GetStarted({super.key});
@@ -61,14 +61,14 @@ class GetStarted extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                MainAppButton(
-                  onPressed: () {
+                MainAppButtonWidget(
+                  onButtonPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const ChooseModePage()));
                   },
-                  title: 'Get Started',
+                  buttonText: 'Get Started',
                 ),
               ],
             ),

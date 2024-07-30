@@ -2,14 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:spotifyclone/core/config/themes/app_color.dart';
+import 'package:spotifyclone/common/widgets/main_app_button_widget.dart';
 import 'package:spotifyclone/presentation/authentication/pages/authentication_page.dart';
 import 'package:spotifyclone/presentation/choose_mode/cubit/theme_cubit.dart';
+import 'package:svg_flutter/svg_flutter.dart';
 
-import '../../../common/widgets/button/main_app_button.dart';
 import '../../../core/assets/app_images.dart';
 import '../../../core/assets/app_vectors.dart';
+import '../../../core/configs/themes/app_colors.dart';
 
 class ChooseModePage extends StatelessWidget {
   const ChooseModePage({super.key});
@@ -142,14 +142,14 @@ class ChooseModePage extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                MainAppButton(
-                  onPressed: () {
+                MainAppButtonWidget(
+                  onButtonPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const AuthenticationPage()));
                   },
-                  title: 'Continue',
+                  buttonText: 'Continue',
                 ),
               ],
             ),

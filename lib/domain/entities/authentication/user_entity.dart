@@ -3,5 +3,6 @@ class UserEntity {
   String? email;
   String? imageURL;
 
-  UserEntity({this.fullName, this.email, this.imageURL});
+  UserEntity(
+      {required this.email, required this.fullName, required this.imageURL});
 }
