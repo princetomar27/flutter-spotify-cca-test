@@ -1,13 +1,13 @@
-import 'package:spotifyclone/domain/entities/songs/songs_entity.dart';
+part of 'news_songs_cubit.dart';
 
 abstract class NewsSongsState {}
 
 class NewsSongsLoading extends NewsSongsState {}
 
 class NewsSongsLoaded extends NewsSongsState {
-  final List<SongsEntity> songs;
+  final List<SongsEntity> newsSongs;
 
-  NewsSongsLoaded({required this.songs});
+  NewsSongsLoaded({required this.newsSongs});
 }
 
 class NewsSongsFailed extends NewsSongsState {}
