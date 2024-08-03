@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/authentication/create_user_request_body_model.dart';
 import '../../models/authentication/sign_in_user_request_body_model.dart';
@@ -9,14 +10,21 @@ abstract class AuthService {
   Future<Either> signUpUser(CreateUserRequestBodyModel user);
 
   Future<Either> signInUser(SignInUserRequestBodyModel user);
+
+  Future<Either> isUserLoggedIn();
 }
 
 class AuthServiceImpl extends AuthService {
+  final SharedPreferences sharedPreferences;
+  AuthServiceImpl({required this.sharedPreferences});
+
   @override
   Future<Either> signInUser(SignInUserRequestBodyModel user) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: user.email, password: user.password);
+
+      sharedPreferences.setBool("isUserLoggedIn", true);
 
       return right('Logged In Successfully !');
     } on FirebaseAuthException catch (err) {
@@ -43,6 +51,7 @@ class AuthServiceImpl extends AuthService {
         'email': user.email,
       });
 
+      sharedPreferences.setBool("isUserLoggedIn", true);
       return right('Account Created Successfully !');
     } on FirebaseAuthException catch (err) {
       String msg = '';
@@ -54,6 +63,17 @@ class AuthServiceImpl extends AuthService {
       }
 
       return left(msg);
+    }
+  }
+
+  @override
+  Future<Either> isUserLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+    bool status = await prefs.getBool("isUserLoggedIn") ?? false;
+    if (status == true) {
+      return right(true);
+    } else {
+      return left(false);
     }
   }
 }

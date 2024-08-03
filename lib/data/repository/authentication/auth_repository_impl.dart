@@ -18,4 +18,9 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either> signUpUser(CreateUserRequestBodyModel user) async {
     return await datasource.signUpUser(user);
   }
+
+  @override
+  Future<Either> isUserLoggedIn() {
+    return datasource.isUserLoggedIn();
+  }
 }

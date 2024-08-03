@@ -5,23 +5,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:spotifyclone/firebase_options.dart';
-import 'package:spotifyclone/presentation/choose_mode/cubit/theme_cubit.dart';
 import 'package:spotifyclone/presentation/splash/pages/splash_page.dart';
 
 import 'core/configs/themes/app_theme.dart';
 import 'injection_container.dart';
+import 'presentation/choose_mode/cubits/choose_theme_mode_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   HydratedBloc.storage = await HydratedStorage.build(
-      storageDirectory: kIsWeb
-          ? HydratedStorage.webStorageDirectory
-          : await getApplicationDocumentsDirectory());
+    storageDirectory: kIsWeb
+        ? HydratedStorage.webStorageDirectory
+        : await getApplicationDocumentsDirectory(),
+  );
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await initDependencies();
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,10 +35,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => AppThemeCubit(),
+          create: (_) => AppThemeModeCubit(),
         ),
       ],
-      child: BlocBuilder<AppThemeCubit, ThemeMode>(
+      child: BlocBuilder<AppThemeModeCubit, ThemeMode>(
         builder: (context, currentThemeMode) {
           return MaterialApp(
             title: 'Flutter Demo',

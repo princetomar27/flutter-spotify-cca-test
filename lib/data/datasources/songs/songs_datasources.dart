@@ -17,25 +17,23 @@ class SongsDatasourcesFirebaseServiceImpl
   @override
   Future<Either> fetchNewsSongs() async {
     try {
-      List<SongsEntity> songs = List.empty();
-
-      var newsSongsData = await firestore
-          .collection(AppConstants.songsCollection)
+      List<SongsEntity> songs = [];
+      var data = await FirebaseFirestore.instance
+          .collection('Songs')
           .orderBy('releaseDate', descending: true)
           .limit(3)
           .get();
 
-      newsSongsData.docs.forEach((newsSongs) {
-        var songModel = SongsModel.fromJson(newsSongs.data());
-        // Now write a extension in song model to convert song model to entity
-        songs.add(
-          songModel.toEntity(),
-        );
-      });
+      for (var element in data.docs) {
+        var songModel = SongsModel.fromJson(element.data());
 
-      return right(songs);
+        songs.add(songModel.toEntity());
+      }
+
+      return Right(songs);
     } catch (e) {
-      return left('An error occured while fetching news songs! $e');
+      print(e);
+      return const Left('An error occurred, Please try again.');
     }
   }
 }

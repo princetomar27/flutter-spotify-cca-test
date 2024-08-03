@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotifyclone/core/constants/app_urls.dart';
 import 'package:spotifyclone/injection_container.dart';
 import 'package:spotifyclone/presentation/home/cubit/news/news_songs_cubit.dart';
-
-import '../../../../common/widgets/molecules/shimmer_item.dart';
 
 class NewsSongsWidget extends StatelessWidget {
   const NewsSongsWidget({super.key});
@@ -22,7 +21,7 @@ class NewsSongsWidget extends StatelessWidget {
               return Container(
                 height: 260,
                 alignment: Alignment.center,
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               );
             } else if (state is NewsSongsFailed) {
               return Container(
@@ -35,18 +34,25 @@ class NewsSongsWidget extends StatelessWidget {
               return ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return Container(
+                  return SizedBox(
                     width: 280,
                     child: Column(children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(image: NetworkImage(""))),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                '${AppUrls.fireStorageURL}${newsSongs[index].artist} - ${newsSongs[index].title}.jpg?${AppUrls.altMedia}',
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ]),
                   );
                 },
                 separatorBuilder: (ctx, index) {
-                  return SizedBox(
+                  return const SizedBox(
                     width: 14,
                   );
                 },

@@ -2,13 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotifyclone/core/configs/themes/app_colors.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 import '../../../../common/helpers/navigation_helpers.dart';
 import '../../../../common/widgets/main_app_button_widget.dart';
 import '../../../../core/assets/app_images.dart';
 import '../../../../core/assets/app_vectors.dart';
+import '../../../core/configs/themes/app_colors.dart';
 import '../../authentication/pages/authentication_page.dart';
 import '../cubits/choose_theme_mode_cubit.dart';
 

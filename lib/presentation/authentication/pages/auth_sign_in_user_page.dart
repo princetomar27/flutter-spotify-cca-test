@@ -80,7 +80,7 @@ class _AuthSignInPageState extends State<AuthSignInPage> {
           ),
 
           MainAppButtonWidget(
-            buttonText: 'Create Account',
+            buttonText: 'Log In',
             onButtonPressed: () async {
               SignInUserRequestBodyModel userBody = SignInUserRequestBodyModel(
                 email: _emailController.text.trim(),

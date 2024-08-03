@@ -7,4 +7,6 @@ abstract class AuthRepository {
   Future<Either> signUpUser(CreateUserRequestBodyModel user);
 
   Future<Either> signInUser(SignInUserRequestBodyModel user);
+
+  Future<Either> isUserLoggedIn();
 }

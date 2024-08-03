@@ -22,12 +22,12 @@ class SongsModel {
   }
 }
 
-extension SongsModelExt on SongsModel {
+extension SongModelX on SongsModel {
   SongsEntity toEntity() {
     return SongsEntity(
-      title: title ?? '',
-      artist: artist ?? '',
-      duration: duration ?? 0,
+      title: title!,
+      artist: artist!,
+      duration: duration!,
       releaseDate: releaseDate!,
     );
   }

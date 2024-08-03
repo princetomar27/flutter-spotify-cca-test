@@ -1,4 +1,4 @@
-import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/entities/songs/songs_entity.dart';
 import '../../../../domain/usecases/songs/fetch_news_songs_usecase.dart';
@@ -10,7 +10,6 @@ class NewsSongsCubit extends Cubit<NewsSongsState> {
 
   NewsSongsCubit({required this.newsSongsUsecase}) : super(NewsSongsLoading());
 
-  // Function to fetch the news songs
   Future<void> fetchNewsSongs() async {
     var newsSongs = await newsSongsUsecase.call(null);
 
