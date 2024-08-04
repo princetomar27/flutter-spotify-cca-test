@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:spotifyclone/core/constants/firebase_constants.dart';
-import 'package:spotifyclone/data/models/songs/songs_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:spotifyclone/domain/entities/songs/songs_entity.dart';
+import 'package:spotifyclone/data/models/songs/songs_model.dart';
 
 abstract class SongsDatasourcesFirebaseService {
-  Future<Either> fetchNewsSongs();
+  Future<Either<String, List<SongsEntity>>> fetchNewsSongs();
 }
 
 class SongsDatasourcesFirebaseServiceImpl
@@ -15,25 +14,23 @@ class SongsDatasourcesFirebaseServiceImpl
   SongsDatasourcesFirebaseServiceImpl({required this.firestore});
 
   @override
-  Future<Either> fetchNewsSongs() async {
+  Future<Either<String, List<SongsEntity>>> fetchNewsSongs() async {
     try {
-      List<SongsEntity> songs = [];
-      var data = await FirebaseFirestore.instance
+      final data = await firestore
           .collection('Songs')
           .orderBy('releaseDate', descending: true)
           .limit(3)
           .get();
 
-      for (var element in data.docs) {
-        var songModel = SongsModel.fromJson(element.data());
-
-        songs.add(songModel.toEntity());
-      }
+      final songs = data.docs.map((doc) {
+        final songModel = SongsModel.fromJson(doc.data());
+        return songModel.toEntity();
+      }).toList();
 
       return Right(songs);
     } catch (e) {
       print(e);
-      return const Left('An error occurred, Please try again.');
+      return Left('An error occurred, Please try again.');
     }
   }
 }
