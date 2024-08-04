@@ -5,6 +5,7 @@ import 'package:spotifyclone/data/datasources/songs/songs_datasources.dart';
 import 'package:spotifyclone/domain/repository/songs/songs_repository.dart';
 import 'package:spotifyclone/domain/usecases/authentication/user_logged_in_usecase.dart';
 import 'package:spotifyclone/domain/usecases/songs/fetch_news_songs_usecase.dart';
+import 'package:spotifyclone/domain/usecases/songs/fetch_playlists.dart';
 import 'data/repository/authentication/auth_repository_impl.dart';
 import 'data/repository/songs/songs_repository_impl.dart';
 import 'domain/usecases/authentication/auth_sign_in_usecase.dart';
@@ -73,6 +74,12 @@ void registerUseCases() {
 
   sl.registerSingleton<FetchNewsSongsUsecase>(
     FetchNewsSongsUsecase(
+      songsRepository: sl<SongsRepository>(),
+    ),
+  );
+
+  sl.registerSingleton<FetchPlaylistUsecase>(
+    FetchPlaylistUsecase(
       songsRepository: sl<SongsRepository>(),
     ),
   );
